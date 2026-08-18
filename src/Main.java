@@ -2,11 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[]args) {
-        double gasto;
+        double gasto = 0;
         String descricao;
-        double entrada;
+        double entrada = 0;
         double saldoInicial;
         double saldo;
+        int operacoesGasto = 0;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Indique o saldo que está disponível em sua conta: ");
         saldoInicial = sc.nextDouble();
@@ -14,7 +16,7 @@ public class Main {
 
         boolean continuar = true;
 
-        while (continuar == true) {
+        while (continuar) {
 
 
 
@@ -26,29 +28,56 @@ public class Main {
             int opcao = sc.nextInt();
 
             if (opcao == 1) {
-                System.out.println("Digite o valor que foi gasto: ");
-                gasto = sc.nextDouble();
+
+                boolean repetir = true;
+                while(repetir) {
+
+                    System.out.println("Digite o valor que foi gasto: ");
+                    gasto = sc.nextDouble();
+                    if (gasto <= 0) {
+                        System.out.println("Valor inserido invalido!");
+                    }else {
+                        repetir = false;
+                    }
+                }
+
+
                 saldo = saldo - gasto;
 
-                System.out.println("Descreva o gasto: ");
+                boolean reperir1 = true;
+                while (reperir1 == true ) {
+                    System.out.println("Descreva o gasto: ");
+                    sc.nextLine();
+                    descricao = sc.nextLine();
+                    if (descricao.isEmpty()){
+                        System.out.println("Descrição não insirida!");
+                    } else {
+                        reperir1 = false;
+                    }
+                }
 
-                descricao = sc.nextLine();
-                descricao = sc.nextLine();
 
 
                 System.out.println("Seu saldo atual é: " + saldo);
 
+
             } else if (opcao == 2) {
 
-                System.out.println("Digite o valor de entrada: ");
-                entrada = sc.nextDouble();
+                while(entrada <= 0) {
+                    System.out.println("Digite o valor de entrada: ");
+                    entrada = sc.nextDouble();
+                   if (entrada <= 0 ) {
+                       System.out.println("Valor inserido invalido!");
+                   }
+                }
                 saldo = saldo + entrada;
-
                 System.out.println("Seu saldo atual é: " + saldo);
 
             } else if (opcao == 3) {
                 System.out.println("Saindo ... ");
                 continuar = false;
+            } else {
+                System.out.println("Opção inválida!");
             }
 
         }
